@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { PostCard } from "./PostCard";
 import { PostListToolbar } from "./PostListToolbar";
-import { getPosts } from "./getPosts";
+import { getPosts } from "@/api/getPosts";
 
 export async function PostList(props: { className?: string }) {
   const { className = "" } = props;

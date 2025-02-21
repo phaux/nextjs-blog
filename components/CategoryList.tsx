@@ -5,10 +5,10 @@ import {
   GlassesIcon,
 } from "lucide-react";
 import { CategoryCard } from "./CategoryCard";
-import artistImage from "./images/artist.jpg";
-import booksImage from "./images/books.jpg";
-import cityImage from "./images/city.jpg";
-import drawingImage from "./images/drawing.jpg";
+import artistImage from "@/public/images/artist.jpg";
+import booksImage from "@/public/images/books.jpg";
+import cityImage from "@/public/images/city.jpg";
+import drawingImage from "@/public/images/drawing.jpg";
 
 export function CategoryList(props: { className?: string }) {
   const { className } = props;

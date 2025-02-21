@@ -40,10 +40,25 @@ export async function getPosts(page: number): Promise<PostData[]> {
     throw new Error(`Failed to fetch posts: ${req.statusText}`);
   }
   const data: PostDataRaw[] = await req.json();
-  // Add fake category and date based on ID.
-  return data.map((post) => ({
+  return data.map(transformPost);
+}
+
+export async function getPost(id: number): Promise<PostData> {
+  const req = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  if (!req.ok) {
+    throw new Error(`Failed to fetch post: ${req.statusText}`);
+  }
+  const data: PostDataRaw = await req.json();
+  return transformPost(data);
+}
+
+/**
+ * Transform raw post data into post data.
+ */
+function transformPost(post: PostDataRaw): PostData {
+  return {
     ...post,
     category: postCategories[post.id % postCategories.length],
     date: new Date(1735689600000 + post.id * 7 * 24 * 60 * 60 * 1000),
-  }));
+  };
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
-import { categoryData, PostData } from "./getPosts";
+import { categoryData, PostData } from "@/api/getPosts";
 
 export function PostCard(props: { className?: string; post: PostData }) {
   const { className = "", post } = props;
@@ -30,7 +30,7 @@ export function PostCard(props: { className?: string; post: PostData }) {
       </time>
       <p className="flex-1 text-sm leading-6">{post.body}</p>
       <Link
-        href={`/articles/${post.id}`}
+        href={`/posts/${post.id}`}
         className="-m-4 p-4 flex gap-2 items-center font-bold text-sm hover:underline"
       >
         zobacz więcej <ArrowRightIcon />

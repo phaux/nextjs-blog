@@ -1,39 +1,36 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
+import { categoryData, PostData } from "./getPosts";
 
-export function PostCard(props: {
-  className?: string;
-  id: string;
-  category: string;
-  title: string;
-  date: Date;
-  content: string;
-}) {
-  const { className = "", id, category, title, date, content } = props;
+export function PostCard(props: { className?: string; post: PostData }) {
+  const { className = "", post } = props;
   return (
     <article
       className={
-        "flex flex-col gap-6 p-6 rounded-tl-4xl rounded-br-4xl bg-zinc-100 dark:bg-zinc-900" +
+        "row-span-4 grid grid-rows-subgrid gap-6 p-6 rounded-tl-4xl rounded-br-4xl bg-zinc-100 dark:bg-zinc-900" +
         className
       }
     >
       <header className="flex flex-col gap-3">
-        <span className="text-sm uppercase underline italic decoration-2">
-          {category}
+        <span
+          className="text-sm uppercase underline italic decoration-2"
+          style={{ color: categoryData[post.category].bg }}
+        >
+          {post.category}
         </span>
         <h1 className="text-xl font-serif font-bold leading-6 text-balance">
-          {title}
+          {post.title}
         </h1>
       </header>
       <time
         className="font-serif text-sm font-bold"
-        dateTime={date.toISOString()}
+        dateTime={post.date.toISOString()}
       >
-        {date.toLocaleDateString()}
+        {post.date.toLocaleDateString()}
       </time>
-      <p className="text-sm leading-6">{content}</p>
+      <p className="flex-1 text-sm leading-6">{post.body}</p>
       <Link
-        href={`/articles/${id}`}
+        href={`/articles/${post.id}`}
         className="-m-4 p-4 flex gap-2 items-center font-bold text-sm hover:underline"
       >
         zobacz więcej <ArrowRightIcon />

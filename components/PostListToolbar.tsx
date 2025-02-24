@@ -1,7 +1,11 @@
 "use client";
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+  ReadonlyURLSearchParams,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 export function PostListToolbar(props: { className?: string }) {
   const { className } = props;
@@ -18,22 +22,26 @@ export function PostListToolbar(props: { className?: string }) {
     >
       <p className="flex-1 flex gap-8 items-baseline">
         <Link
-          href={{ query: { filter: "favorite" } }}
+          href={{
+            query: overrideParams(params, { filter: "favorite" }).toString(),
+          }}
           scroll={false}
           className={clsx(
             "uppercase decoration-2 cursor-pointer",
-            favorite && "text-red-900 dark:text-red-700 font-bold underline",
+            favorite && "text-red-900 dark:text-red-700 font-bold underline"
           )}
         >
           Ulubione
         </Link>
         <span className="text-red-900 dark:text-red-700">{" / "}</span>
         <Link
-          href={{ query: { filter: "" } }}
+          href={{
+            query: overrideParams(params, { filter: "" }).toString(),
+          }}
           scroll={false}
           className={clsx(
             "uppercase decoration-2 cursor-pointer",
-            !favorite && "text-red-900 dark:text-red-700 font-bold underline",
+            !favorite && "text-red-900 dark:text-red-700 font-bold underline"
           )}
         >
           Wszystkie
@@ -45,11 +53,13 @@ export function PostListToolbar(props: { className?: string }) {
           className="font-bold border-b-1 border-b-slate-500 h-10 cursor-pointer"
           name="order"
           value={order || "latest"}
-          onChange={(e) => {
-            const newParams = new URLSearchParams(params);
-            newParams.set("order", e.target.value);
-            router.push("?" + newParams.toString(), { scroll: false });
-          }}
+          onChange={(e) =>
+            router.push(
+              "?" +
+                overrideParams(params, { order: e.target.value }).toString(),
+              { scroll: false }
+            )
+          }
         >
           <option value="latest">Najnowsze</option>
           <option value="title">Alfabetycznie</option>
@@ -57,4 +67,19 @@ export function PostListToolbar(props: { className?: string }) {
       </label>
     </form>
   );
+}
+
+function overrideParams(
+  params: ReadonlyURLSearchParams,
+  overrides: Record<string, string | null>
+) {
+  const newParams = new URLSearchParams(params);
+  for (const [key, value] of Object.entries(overrides)) {
+    if (value != null) {
+      newParams.set(key, value);
+    } else {
+      newParams.delete(key);
+    }
+  }
+  return newParams;
 }

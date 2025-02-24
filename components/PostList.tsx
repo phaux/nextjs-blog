@@ -19,6 +19,10 @@ export async function PostList(props: {
     order === "title"
       ? posts.sort((a, b) => a.title.localeCompare(b.title))
       : posts.sort((a, b) => Number(b.date) - Number(a.date));
+  const filteredPosts = orderedPosts
+    .filter((post) => (favOnly ? liked.includes(post.id.toString()) : true))
+    .filter((post) => (categories ? categories.includes(post.category) : true));
+
   return (
     <section className={"flex flex-col gap-8 lg:gap-16 " + className}>
       <div className="flex flex-wrap items-center gap-8 lg:gap-16">
@@ -30,18 +34,17 @@ export async function PostList(props: {
         </div>
         <PostListToolbar className="flex-1" />
       </div>
-      <div className="grid gap-8 lg:gap-16 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-        {orderedPosts
-          .filter((post) =>
-            favOnly ? liked.includes(post.id.toString()) : true,
-          )
-          .filter((post) =>
-            categories ? categories.includes(post.category) : true,
-          )
-          .map((post) => (
+      {filteredPosts.length === 0 ? (
+        <p className="text-center text-lg text-zinc-400">
+          Brak wpisów do wyświetlenia
+        </p>
+      ) : (
+        <div className="grid gap-8 lg:gap-16 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+          {filteredPosts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

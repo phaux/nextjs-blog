@@ -11,24 +11,24 @@ export default async function HomePage(props: {
 
   return (
     <>
-      <AppHeader className="container mx-auto" />
+      <AppHeader className="container mx-auto px-8 lg:px-16" />
       <main className="flex flex-col gap-8 lg:gap-16">
-        <h1 className="container mx-auto text-3xl font-bold">
+        <h1 className="container mx-auto text-3xl font-bold px-8 lg:px-16">
           Blog edukacyjny
         </h1>
         <div className="bg-zinc-100 dark:bg-zinc-900 py-8 lg:py-16">
           <CategoryList
-            className="container mx-auto"
+            className="container mx-auto px-8 lg:px-16"
             activeCategories={categories}
           />
         </div>
         <PostList
-          className="container mx-auto"
+          className="container mx-auto px-8 lg:px-16"
           categories={categories}
           favOnly={
             typeof filter == "string"
               ? filter === "favorite"
-              : (filter?.includes("favorite") ?? false)
+              : filter?.includes("favorite") ?? false
           }
           order={order}
         />

@@ -18,9 +18,9 @@ export default async function PostPage(props: {
 
   return (
     <>
-      <AppHeader className="container mx-auto" />
-      <main className="flex flex-col gap-8 lg:gap-16">
-        <div className="container mx-auto flex items-center justify-between">
+      <AppHeader className="container mx-auto px-8 lg:px-16" />
+      <main className="container mx-auto flex flex-col gap-8 lg:gap-16 px-8 lg:px-16">
+        <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 lg:gap-16">
           <h1 className="text-3xl font-bold">
             <Link
               href="/"
@@ -44,7 +44,7 @@ export default async function PostPage(props: {
             )}
           </button>
         </div>
-        <article className="container mx-auto flex flex-col items-stretch gap-8 lg:gap-16">
+        <article className="flex flex-col items-stretch gap-8 lg:gap-16">
           <h2 className="text-3xl font-serif font-bold leading-6 text-balance">
             {post.title}
           </h2>

@@ -16,7 +16,7 @@ export function PostCard(props: { className?: string; post: PostData }) {
           className="text-sm uppercase underline italic decoration-2"
           style={{ color: categoryData[post.category].bg }}
         >
-          {post.category}
+          {categoryData[post.category].name.pl}
         </span>
         <h1 className="text-xl font-serif font-bold leading-6 text-balance">
           {post.title}

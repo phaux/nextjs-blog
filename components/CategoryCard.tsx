@@ -1,23 +1,36 @@
+import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { cloneElement } from "react";
+import { UrlObject } from "url";
 
 export function CategoryCard(props: {
   className?: string;
-  href: string;
+  href: string | UrlObject;
   image: StaticImageData;
   alt: string;
   title: string;
   icon: React.ReactElement<{ className?: string }>;
+  active?: boolean;
 }) {
-  const { className = "", href, image, alt, title, icon } = props;
+  const {
+    className = "",
+    href,
+    image,
+    alt,
+    title,
+    icon,
+    active = false,
+  } = props;
   return (
     <Link
       href={href}
-      className={
-        "group flex flex-col items-stretch overflow-clip rounded-tl-4xl rounded-br-4xl " +
-        className
-      }
+      scroll={false}
+      className={clsx(
+        "group flex flex-col items-stretch overflow-clip rounded-tl-4xl rounded-br-4xl ",
+        active && "ring-8",
+        className,
+      )}
     >
       <div className="grid place-items-stretch h-48 overflow-hidden">
         <Image

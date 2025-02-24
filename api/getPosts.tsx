@@ -11,25 +11,43 @@ export interface PostDataRaw {
  * All post data.
  */
 export interface PostData extends PostDataRaw {
-  category: (typeof postCategories)[number];
+  category: PostCategory;
   date: Date;
 }
+
+export type PostCategory = (typeof postCategories)[number];
 
 export const postCategories = [
   "knowledge",
   "inspiration",
   "interpretation",
   "available",
-];
+] as const;
 
 export const categoryData: Record<
-  (typeof postCategories)[number],
-  { bg: string; text: string }
+  PostCategory,
+  { bg: string; text: string; name: { pl: string } }
 > = {
-  knowledge: { bg: "royalblue", text: "white" },
-  inspiration: { bg: "gold", text: "black" },
-  interpretation: { bg: "crimson", text: "white" },
-  available: { bg: "aquamarine", text: "black" },
+  knowledge: {
+    bg: "royalblue",
+    text: "white",
+    name: { pl: "Wiedza" },
+  },
+  inspiration: {
+    bg: "gold",
+    text: "black",
+    name: { pl: "Inspiracje" },
+  },
+  interpretation: {
+    bg: "crimson",
+    text: "white",
+    name: { pl: "Interpretacje" },
+  },
+  available: {
+    bg: "aquamarine",
+    text: "black",
+    name: { pl: "Dostępne" },
+  },
 };
 
 export async function getPosts(page: number): Promise<PostData[]> {

@@ -27,7 +27,7 @@ export function PostListToolbar(props: { className?: string }) {
           }}
           scroll={false}
           className={clsx(
-            "uppercase decoration-2 cursor-pointer",
+            "uppercase decoration-2 cursor-pointer hover:underline",
             favorite && "text-red-900 dark:text-red-700 font-bold underline"
           )}
         >
@@ -40,7 +40,7 @@ export function PostListToolbar(props: { className?: string }) {
           }}
           scroll={false}
           className={clsx(
-            "uppercase decoration-2 cursor-pointer",
+            "uppercase decoration-2 cursor-pointer hover:underline",
             !favorite && "text-red-900 dark:text-red-700 font-bold underline"
           )}
         >

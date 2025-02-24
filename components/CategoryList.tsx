@@ -20,7 +20,7 @@ export function CategoryList(props: {
       <h1 className="container mx-auto text-2xl font-bold px-8 lg:px-16">
         Kategorie
       </h1>
-      <ul className="max-w-full md:container mx-auto flex overflow-x-scroll snap-x snap-mandatory max-md:*:w-xs *:flex-shrink-0 *:snap-center *:snap-always md:grid gap-8 lg:gap-16 md:grid-cols-2 xl:grid-cols-4 p-8 lg:p-16">
+      <ul className="max-w-full md:container mx-auto flex overflow-x-auto snap-x snap-mandatory max-md:*:w-xs *:flex-shrink-0 *:snap-center *:snap-always md:grid gap-8 lg:gap-16 md:grid-cols-2 xl:grid-cols-4 p-8 lg:p-16">
         <li>
           <CategoryCard
             className="bg-blue-900 text-white ring-blue-950"

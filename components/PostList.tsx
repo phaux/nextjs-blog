@@ -58,6 +58,7 @@ function ClearCategoriesButton({ categories }: { categories: string[] }) {
   return (
     <Link
       href="/"
+scroll={false}
       className="flex gap-2 items-center uppercase decoration-2 cursor-pointer hover:underline"
     >
       <XIcon /> {label}
